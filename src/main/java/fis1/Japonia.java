@@ -17,6 +17,7 @@ public class Japonia {
 	private Text text_1;
 	private Text text_2;
 	private Text text_3;
+	private Text text_4;
 
 	/**
 	 * Launch the application.
@@ -85,6 +86,9 @@ public class Japonia {
 		
 		text_3 = new Text(shlYeyeye, SWT.BORDER);
 		text_3.setBounds(254, 76, 78, 26);
+		
+		text_4 = new Text(shlYeyeye, SWT.BORDER);
+		text_4.setBounds(221, 190, 78, 26);
 
 	}
 }
