@@ -15,6 +15,7 @@ public class Japonia {
 	protected Shell shlYeyeye;
 	private Text text;
 	private Text text_1;
+	private Text text_2;
 
 	/**
 	 * Launch the application.
@@ -53,14 +54,14 @@ public class Japonia {
 		shlYeyeye.setText("yeyeye");
 		
 		Label lblNewLabel = new Label(shlYeyeye, SWT.NONE);
-		lblNewLabel.setBounds(23, 51, 55, 15);
+		lblNewLabel.setBounds(23, 51, 55, 45);
 		lblNewLabel.setText("Nume");
 		
 		text = new Text(shlYeyeye, SWT.BORDER);
 		text.setBounds(151, 51, 76, 21);
 		
 		Label lblNewLabel_1 = new Label(shlYeyeye, SWT.NONE);
-		lblNewLabel_1.setBounds(23, 102, 55, 15);
+		lblNewLabel_1.setBounds(23, 102, 55, 30);
 		lblNewLabel_1.setText("Parola");
 		
 		
@@ -75,8 +76,11 @@ public class Japonia {
 				zoee.open();
 			}
 		});
-		btnNewButton.setBounds(108, 171, 75, 25);
+		btnNewButton.setBounds(108, 171, 86, 30);
 		btnNewButton.setText("Spre alta");
+		
+		text_2 = new Text(shlYeyeye, SWT.BORDER);
+		text_2.setBounds(254, 129, 78, 26);
 
 	}
 }
