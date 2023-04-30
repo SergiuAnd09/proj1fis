@@ -1,4 +1,4 @@
-package fis1;
+package dbObjects;
 
 public class Client {
 

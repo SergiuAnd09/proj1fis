@@ -3,6 +3,8 @@ package fis1;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.ToolBar;
 
 public class AdminPage extends Composite {
 
@@ -24,5 +26,4 @@ public class AdminPage extends Composite {
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
-
 }
