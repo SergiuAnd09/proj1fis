@@ -7,7 +7,11 @@ import ui.LayoutStack;
 
 public class LoginPage {
 
-	protected Shell shell;
+	public static Shell getShell() {
+		return shell;
+	}
+
+	protected static Shell shell;
 
 	/**
 	 * Launch the application.
@@ -46,7 +50,7 @@ public class LoginPage {
 		shell.setText("Login");
 		
 		LayoutStack.createInstance(shell);
-		
+
 		LayoutStack.getInstance().changeLayout(0);
 	}
 

@@ -2,13 +2,18 @@ package fis1;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+
+import ui.LayoutStack;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class RegisterPage extends Composite {
-	private Text text;
-	private Text text_1;
+	private Text emailTxt;
+	private Text passwordTxt;
 
 	/**
 	 * Create the composite.
@@ -18,27 +23,39 @@ public class RegisterPage extends Composite {
 	public RegisterPage(Composite parent, int style) {
 		super(parent, style);
 		
-		text = new Text(this, SWT.BORDER);
-		text.setBounds(131, 73, 180, 28);
+		emailTxt = new Text(this, SWT.BORDER);
+		emailTxt.setBounds(131, 73, 202, 28);
 		
-		text_1 = new Text(this, SWT.BORDER);
-		text_1.setBounds(131, 113, 180, 28);
+		passwordTxt = new Text(this, SWT.BORDER | SWT.PASSWORD);
+		passwordTxt.setBounds(131, 113, 202, 28);
 		
-		Button btnNewButton = new Button(this, SWT.NONE);
-		btnNewButton.setBounds(106, 171, 105, 35);
-		btnNewButton.setText("New Button");
+		Button registerButton = new Button(this, SWT.NONE);
+		registerButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+			}
+		});
+		registerButton.setBounds(99, 171, 105, 35);
+		registerButton.setText("Register");
 		
-		Button btnNewButton_1 = new Button(this, SWT.NONE);
-		btnNewButton_1.setBounds(228, 171, 105, 35);
-		btnNewButton_1.setText("New Button");
+		Button cancelButton = new Button(this, SWT.NONE);
+		cancelButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				LayoutStack.getInstance().changeLayout(0);
+			}
+		});
+		cancelButton.setBounds(248, 171, 105, 35);
+		cancelButton.setText("Cancel");
 		
-		Label lblNewLabel = new Label(this, SWT.NONE);
-		lblNewLabel.setBounds(69, 76, 47, 25);
-		lblNewLabel.setText("Email");
+		Label emailLabel = new Label(this, SWT.NONE);
+		emailLabel.setBounds(69, 76, 47, 25);
+		emailLabel.setText("Email");
 		
-		Label lblNewLabel_1 = new Label(this, SWT.NONE);
-		lblNewLabel_1.setBounds(35, 116, 81, 25);
-		lblNewLabel_1.setText("Password");
+		Label passwordLabel = new Label(this, SWT.NONE);
+		passwordLabel.setBounds(35, 116, 81, 25);
+		passwordLabel.setText("Password");
 
 	}
 
