@@ -5,7 +5,8 @@ import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import fis1.Japonia;
+import fis1.LoginPage;
+import fis1.LoginMenu;
 
 public class LayoutStack {
 
@@ -21,8 +22,27 @@ public class LayoutStack {
 		
 		layouts = new Composite[2];
 		
-		//layouts[0] = new Japonia(shell, SWT.NONE);
+		layouts[0] = new LoginMenu(shell, SWT.NONE);
 		
 		//layouts[1] = new SqrtPage(shell, SWT.NONE);
+	}
+	
+	public void changeLayout(int winNumber) {
+		layouts[crtActive].setVisible(!layouts[crtActive].isVisible());
+		stack.topControl = layouts[winNumber];
+		crtActive = winNumber;
+		shell.layout();
+	}
+	
+	private static LayoutStack _instance;
+	
+	public static void createInstance(Shell shell) {
+		_instance = new LayoutStack(shell);
+	}
+	
+	public static LayoutStack getInstance() {
+		if(_instance == null)
+			throw new RuntimeException("Stack not instanciated but used");
+		return _instance;
 	}
 }
