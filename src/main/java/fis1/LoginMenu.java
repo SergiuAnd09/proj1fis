@@ -46,6 +46,8 @@ public class LoginMenu extends Composite {
 		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				LoginPage.getShell().setText("Register");
+				LayoutStack.getInstance().changeLayout(1);
 			}
 		});
 		btnNewButton_1.setBounds(228, 176, 90, 30);
