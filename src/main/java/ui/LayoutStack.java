@@ -7,6 +7,8 @@ import org.eclipse.swt.widgets.Shell;
 
 import fis1.LoginPage;
 import fis1.LoginMenu;
+import fis1.AdminPage;
+import fis1.RegisterPage;
 
 public class LayoutStack {
 
@@ -24,7 +26,9 @@ public class LayoutStack {
 		
 		layouts[0] = new LoginMenu(shell, SWT.NONE);
 		
-		//layouts[1] = new SqrtPage(shell, SWT.NONE);
+		layouts[1] = new RegisterPage(shell, SWT.NONE);
+		
+		layouts[2] = new AdminPage(shell, SWT.NONE);
 	}
 	
 	public void changeLayout(int winNumber) {
