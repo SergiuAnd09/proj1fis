@@ -26,6 +26,9 @@ public class Japonia {
 	public static void main(String[] args) {
 		try {
 			Japonia window = new Japonia();
+			String a = DBConnection.url;
+			String b = DBConnection.password;
+			String c = DBConnection.username;
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
