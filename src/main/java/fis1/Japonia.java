@@ -77,8 +77,8 @@ public class Japonia {
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				zoe zoee = new zoe();
-				zoee.open();
+//				zoe zoee = new zoe();
+//				zoee.open();
 			}
 		});
 		btnNewButton.setBounds(108, 171, 86, 30);
