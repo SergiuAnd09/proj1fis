@@ -1,6 +1,8 @@
 package fis1;
 
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.SWT;
 
 public class AdminPage extends Composite {
 
@@ -11,6 +13,10 @@ public class AdminPage extends Composite {
 	 */
 	public AdminPage(Composite parent, int style) {
 		super(parent, style);
+		
+		Label lblHello = new Label(this, SWT.NONE);
+		lblHello.setBounds(56, 132, 70, 20);
+		lblHello.setText("hello");
 
 	}
 
