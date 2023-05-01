@@ -10,7 +10,7 @@ public class DBConnection {
     static {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/db.txt"));
-            url = "jdbc:mysql://localhost:3306/test";
+            url = "jdbc:mysql://localhost:3306/fis_proj";
             username = reader.readLine();
             password = reader.readLine();
             reader.close();
