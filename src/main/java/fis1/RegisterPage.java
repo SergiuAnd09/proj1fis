@@ -119,6 +119,10 @@ public class RegisterPage extends Composite {
                                 public void run() {
                                 	LoginPage.getShell().setText("Login");
                                     LayoutStack.getInstance().changeLayout(0);
+                                    emailTxt.setText("");
+                                    passwordTxt.setText("");
+                                    passwordConfirmTxt.setText("");
+                                    warningLabel.setText("");
                                 }
                             });
                         } catch (SQLException ex) {
