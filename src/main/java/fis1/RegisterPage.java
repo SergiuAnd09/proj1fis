@@ -33,7 +33,6 @@ public class RegisterPage extends Composite {
 
         emailTxt = new Text(this, SWT.BORDER);
         emailTxt.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-        emailTxt.setText("testr");
         emailTxt.setBounds(173, 38, 202, 28);
 
         passwordTxt = new Text(this, SWT.BORDER | SWT.PASSWORD);
