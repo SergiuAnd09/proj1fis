@@ -5,8 +5,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 
 public class AdminPage extends Composite {
+	private Table table;
 
 	/**
 	 * Create the composite.
@@ -16,9 +19,14 @@ public class AdminPage extends Composite {
 	public AdminPage(Composite parent, int style) {
 		super(parent, style);
 		
-		Label lblHello = new Label(this, SWT.NONE);
-		lblHello.setBounds(56, 132, 70, 20);
-		lblHello.setText("hello");
+		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
+		table.setBounds(184, 106, 89, 51);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		
+		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn.setWidth(200);
+		tblclmnNewColumn.setText("Email");
 
 	}
 
