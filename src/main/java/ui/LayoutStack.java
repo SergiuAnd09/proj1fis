@@ -1,5 +1,7 @@
 package ui;
 
+import java.sql.SQLException;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -17,7 +19,7 @@ public class LayoutStack {
 	Composite[] layouts;
 	Shell shell;
 	
-	public LayoutStack(Shell shell) {
+	public LayoutStack(Shell shell) throws SQLException {
 		this.shell = shell;
 		stack = new StackLayout();
 		shell.setLayout(stack);
@@ -40,7 +42,7 @@ public class LayoutStack {
 	
 	private static LayoutStack _instance;
 	
-	public static void createInstance(Shell shell) {
+	public static void createInstance(Shell shell) throws SQLException {
 		_instance = new LayoutStack(shell);
 	}
 	

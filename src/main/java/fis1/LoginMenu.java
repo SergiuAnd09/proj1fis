@@ -32,7 +32,7 @@ public class LoginMenu extends Composite {
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if(textEmail.getText().equals("admin@email.com") && textPassword.getText().equals("admin")) {
+				if(textEmail.getText().equals("admin") && textPassword.getText().equals("admin")) {
 					LayoutStack.getInstance().changeLayout(2);
 				}
 				else {;}

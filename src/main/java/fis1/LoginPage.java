@@ -1,5 +1,7 @@
 package fis1;
 
+import java.sql.SQLException;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -28,8 +30,9 @@ public class LoginPage {
 
 	/**
 	 * Open the window.
+	 * @throws SQLException 
 	 */
-	public void open() {
+	public void open() throws SQLException {
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
@@ -43,8 +46,9 @@ public class LoginPage {
 
 	/**
 	 * Create contents of the window.
+	 * @throws SQLException 
 	 */
-	protected void createContents() {
+	protected void createContents() throws SQLException {
 		shell = new Shell();
 		shell.setSize(450, 300);
 		shell.setText("Login");
