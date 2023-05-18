@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -17,10 +18,13 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import dbObjects.Cerere;
+import dbObjects.ContentProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.jface.viewers.TreeViewer;
 
 public class AdminPage extends Composite {
-	private Table table;
+	private Table table_1;
 
 	/**
 	 *
@@ -32,40 +36,17 @@ public class AdminPage extends Composite {
 	public AdminPage(Composite parent, int style) throws SQLException {
 		super(parent, style);
 		
-		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
-		table.setBounds(58, 82, 422, 298);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
+		//table viewer
+		ContentProvider contentProvider = new ContentProvider();
 		
-		//conexiune
-		List<Cerere> cereri = new ArrayList<Cerere>();
+		TableViewer tableViewer = new TableViewer(this, SWT.BORDER | SWT.FULL_SELECTION);
+		table_1 = tableViewer.getTable();
+		table_1.setBounds(92, 65, 426, 330);
+		
 
-		Connection connection = null;
-        PreparedStatement takemails = null, takemessages = null;
-        ResultSet emailuri, mesaje = null;
-        
-        connection= DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-        takemails = connection.prepareStatement("select email from requests");
-        emailuri = takemails.executeQuery();
-        takemessages = connection.prepareStatement("select message from requests");
-        mesaje = takemessages.executeQuery();
-        
-        while(emailuri.next() && mesaje.next()) {
-        	
-        	String email = emailuri.getString("email");
-        	String mesaj = mesaje.getString("message");
-        	Cerere cerere = new Cerere(email, mesaj);
-        	cereri.add(cerere);
-        }
-        
-        emailuri.close();
-        mesaje.close();
-        takemails.close();
-        takemessages.close();
-        connection.close();
-        
-        //incheiere conexiune
+		tableViewer.setContentProvider(contentProvider);
+		tableViewer.setInput(contentProvider.getElements(null));
+		
 		
 		
 	}

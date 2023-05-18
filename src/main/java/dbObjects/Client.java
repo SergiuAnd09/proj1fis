@@ -5,6 +5,7 @@ public class Client {
 	private String email;
 	private String parola;
 	private int id;
+	private boolean seller;
 
 	public Client(String email, String parola) {
 		super();
@@ -12,7 +13,17 @@ public class Client {
 		this.parola = parola;
 		id = hashCode();
 	}
-
+	
+	public boolean getSeller() {
+		
+		return this.seller;
+	}
+	
+	public void setSeller(boolean seller_approve) {
+		
+		this.seller=seller_approve;
+	}
+	
 	public Client() {
 		super();
 	}

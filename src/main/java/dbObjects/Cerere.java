@@ -37,6 +37,7 @@ public class Cerere {
 	            @Override
 	            public void widgetSelected(SelectionEvent e) {
 	                // Code to accept the request
+	            	
 	            }
 	        });
 	        return button;
