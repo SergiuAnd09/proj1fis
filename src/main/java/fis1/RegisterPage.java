@@ -167,16 +167,19 @@ public class RegisterPage extends Composite {
         cancelButton.setText("Cancel");
 
         Label emailLabel = new Label(this, SWT.NONE);
-        emailLabel.setBounds(111, 41, 47, 25);
+        emailLabel.setAlignment(SWT.RIGHT);
+        emailLabel.setBounds(77, 41, 81, 25);
         emailLabel.setText("Email");
 
         Label passwordLabel = new Label(this, SWT.NONE);
+        passwordLabel.setAlignment(SWT.RIGHT);
         passwordLabel.setBounds(77, 81, 81, 25);
         passwordLabel.setText("Password");
 
         Label lblConfirmPassword = new Label(this, SWT.NONE);
+        lblConfirmPassword.setAlignment(SWT.RIGHT);
         lblConfirmPassword.setText("Confirm Password");
-        lblConfirmPassword.setBounds(10, 121, 157, 25);
+        lblConfirmPassword.setBounds(1, 121, 157, 25);
 
         passwordConfirmTxt = new Text(this, SWT.BORDER | SWT.PASSWORD);
         passwordConfirmTxt.setBounds(173, 118, 202, 28);

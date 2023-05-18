@@ -12,11 +12,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.19</version>
         </dependency>
-        <dependency>
-        	<groupId>ro.upt.ac.magazin_online_1.grup4</groupId>
-        	<artifactId>magazin_online_1</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 
