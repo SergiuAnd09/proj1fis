@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import org.eclipse.swt.custom.TableEditor;
 
@@ -21,6 +23,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 //import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -52,15 +55,15 @@ public class AdminPage extends Composite {
 		ContentProvider contentProvider = new ContentProvider();
 		
 		
-		TableViewer tableViewer = new TableViewer(this, SWT.BORDER | SWT.FULL_SELECTION);
+		final TableViewer tableViewer = new TableViewer(this, SWT.BORDER | SWT.FULL_SELECTION);
 		table_1 = tableViewer.getTable();
 		table_1.setBounds(33, 65, 560, 330);
 		
 		  
 		 
 		
-		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tblclmnEmail = tableViewerColumn.getColumn();
+		final TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
+		final TableColumn tblclmnEmail = tableViewerColumn.getColumn();
 		tblclmnEmail.setWidth(100);
 		tblclmnEmail.setText("email");
 		
@@ -93,37 +96,58 @@ public class AdminPage extends Composite {
 		tblclmnNewColumn_1.setText("Accept");
 		
 		
-		  tableViewerColumn_3.setLabelProvider(new ColumnLabelProvider() {
-		  
-		  @Override public void update(ViewerCell cell) {
-		  
-		  TableItem tableItem = (TableItem) cell.getItem();
-		  final TableEditor editor = new TableEditor(tableItem.getParent());
-		  
-		  final Button button = new Button(tableItem.getParent(), SWT.PUSH);
-		  button.setText("Yes");
-		  button.addSelectionListener(new SelectionAdapter() {
-			  
-			  @Override
-			  public void widgetSelected(SelectionEvent e) {
-				  
-				  System.out.println("yey");
-			  }
-		  });
-		  
-		  editor.grabHorizontal = true;
-	        editor.setEditor(button, tableItem, cell.getColumnIndex());
-	        editor.layout();
-	        
-	        tableItem.addDisposeListener(new DisposeListener() {
-	            public void widgetDisposed(DisposeEvent e) {
-	                button.dispose();
-	                editor.dispose();
-	            }
-	        });
-		  }
-		  
-		  });
+		tableViewerColumn_3.setLabelProvider(new ColumnLabelProvider() {
+		    @Override
+		    public void update(ViewerCell cell) {
+		        TableItem tableItem = (TableItem) cell.getItem();
+		        final TableEditor editor = new TableEditor(tableItem.getParent());
+
+		        final Button button = new Button(tableItem.getParent(), SWT.PUSH);
+		        button.setText("Yes");
+		        button.setData(tableItem); // Set the TableItem as the data
+
+		        button.addSelectionListener(new SelectionAdapter() {
+		            @Override
+		            public void widgetSelected(SelectionEvent e) {
+		                // Get the TableItem associated with the clicked button
+		                TableItem selectedTableItem = (TableItem) button.getData();
+		                if (selectedTableItem != null) {
+		                    // Get the corresponding data object (Cerere)
+		                    Cerere selectedCerere = (Cerere) selectedTableItem.getData();
+
+		                    // Access the data of the selected row
+		                    final String email = selectedCerere.getEmail();
+		                    String message = selectedCerere.getMessage();
+
+		                    
+		                    // Perform actions with the data
+		                    System.out.println("Email: " + email);
+		                    System.out.println("Message: " + message);
+		                    
+		                    
+		                    ContentProvider.cereri.removeIf(entry -> entry.getEmail().equals(email));
+		                    
+		                    table_1.remove(table_1.indexOf(selectedTableItem));
+		                    tableViewer.refresh();
+
+		                }
+		            }
+		        });
+
+		        editor.grabHorizontal = true;
+		        editor.setEditor(button, tableItem, cell.getColumnIndex());
+		        editor.layout();
+
+		        tableItem.addDisposeListener(new DisposeListener() {
+		            public void widgetDisposed(DisposeEvent e) {
+		                button.dispose();
+		                editor.dispose();
+		            }
+		        });
+		    }
+		});
+
+
 		 
 		
 		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);

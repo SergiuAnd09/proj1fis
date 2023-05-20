@@ -13,7 +13,7 @@ import fis1.DBConnection;
 
 public class ContentProvider implements IStructuredContentProvider {
 
-	 List<Cerere> cereri = new ArrayList<Cerere>();
+	 public static List<Cerere> cereri = new ArrayList<Cerere>();
 
 	public ContentProvider() {
 		try {
