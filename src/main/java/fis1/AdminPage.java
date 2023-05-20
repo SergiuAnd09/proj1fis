@@ -154,6 +154,7 @@ public class AdminPage extends Composite {
 		        editor.grabHorizontal = true;
 		        editor.setEditor(button, tableItem, cell.getColumnIndex());
 		        editor.layout();
+		        
 
 		        tableItem.addDisposeListener(new DisposeListener() {
 		            public void widgetDisposed(DisposeEvent e) {
@@ -187,6 +188,7 @@ public class AdminPage extends Composite {
 				  
 				  @Override
 				  public void widgetSelected(SelectionEvent e) {
+//<<<<<<< Updated upstream
 					  // Get the TableItem associated with the clicked button
 		                TableItem selectedTableItem = (TableItem) button.getData();
 		                if (selectedTableItem != null) {
@@ -222,7 +224,12 @@ public class AdminPage extends Composite {
 //		                    tableViewer.refresh();
 
 		                }
+//=======
+					  //TableItem tt = new TableItem(table_1, SWT.NONE);
+//>>>>>>> Stashed changes
 					  System.out.println("nay z");
+					  //System.out.println(tt.getText(1));
+					  
 				  }
 			  });
 			  

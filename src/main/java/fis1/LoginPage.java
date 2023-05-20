@@ -50,7 +50,7 @@ public class LoginPage {
 	 */
 	protected void createContents() throws SQLException {
 		shell = new Shell();
-		shell.setSize(450, 300);
+		shell.setSize(600, 600);
 		shell.setText("Login");
 		
 		LayoutStack.createInstance(shell);
