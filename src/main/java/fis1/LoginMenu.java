@@ -44,7 +44,7 @@ public class LoginMenu extends Composite {
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (textEmail.getText().equals("admin@email.com") && textPassword.getText().equals("admin")) {
+				if (textEmail.getText().equals("a") && textPassword.getText().equals("a")) {
 					lblFeedback.setText("Admin Login Successful.");
 					Display display = lblFeedback.getDisplay();
 					display.timerExec(1500, new Runnable() {

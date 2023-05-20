@@ -20,6 +20,15 @@ public class Cerere {
 	
 	public Cerere() {}
 	
+	public void setEmail(String email) {
+		
+		this.email=email;
+	}
+	
+	public void setMessage(String message) {
+		this.message=message;
+	}
+	
 	public String getEmail() {
 		
 		return this.email;
@@ -30,16 +39,26 @@ public class Cerere {
 		return this.message;
 	}
 	
-	 public Button createButton(Composite AdminPage) {
-	        Button button = new Button((org.eclipse.swt.widgets.Composite) AdminPage, SWT.NONE);
-	        button.setText("Accept Request");
-	        button.addSelectionListener(new SelectionAdapter() {
-	            @Override
-	            public void widgetSelected(SelectionEvent e) {
-	                // Code to accept the request
-	            	
-	            }
-	        });
-	        return button;
-	    }
+	@Override
+	public String toString() {
+		
+		return "[Email:"+ email + " Message:"+message+ "]";
+	}
+	
+	/*
+	 * public Button createButton(Composite AdminPage) { Button button = new
+	 * Button((org.eclipse.swt.widgets.Composite) AdminPage, SWT.NONE);
+	 * button.setText("Yes"); button.addSelectionListener(new SelectionAdapter() {
+	 * 
+	 * @Override public void widgetSelected(SelectionEvent e) { // Code to accept
+	 * the request System.out.println("Yay");
+	 * 
+	 * } }); return button; }
+	 */
+	
+	/*
+	 * public Button YesButton() {
+	 * 
+	 * Button yes = new Button(); }
+	 */
 }

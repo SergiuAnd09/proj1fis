@@ -26,10 +26,12 @@ public class ContentProvider implements IStructuredContentProvider {
 			while (emailuri.next() && mesaje.next()) {
 				String email = emailuri.getString("email");
 				String mesaj = mesaje.getString("message");
-				Cerere cerere = new Cerere(email, mesaj);
+				Cerere cerere = new Cerere();
+				cerere.setEmail(email);
+				cerere.setMessage(mesaj);
 				cereri.add(cerere);
 			}
-			
+			//System.out.println(cereri);
 			// Close the resources
 			mesaje.close();
 			takemessages.close();
