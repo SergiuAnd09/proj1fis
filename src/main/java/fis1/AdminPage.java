@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
@@ -90,11 +91,13 @@ public class AdminPage extends Composite {
 					
 				});
 		
+				ArrayList<Button> buttonListYes = new ArrayList<>();
+				ArrayList<Button> buttonListNo = new ArrayList<>();		
+				
 		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn_1 = tableViewerColumn_3.getColumn();
 		tblclmnNewColumn_1.setWidth(100);
 		tblclmnNewColumn_1.setText("Accept");
-		
 		
 		tableViewerColumn_3.setLabelProvider(new ColumnLabelProvider() {
 		    @Override
@@ -104,7 +107,8 @@ public class AdminPage extends Composite {
 
 		        final Button button = new Button(tableItem.getParent(), SWT.PUSH);
 		        button.setText("Yes");
-		        button.setData(tableItem); // Set the TableItem as the data
+		        button.setData(tableItem);
+		        buttonListYes.add(button);
 
 		        button.addSelectionListener(new SelectionAdapter() {
 		            @Override
@@ -118,17 +122,30 @@ public class AdminPage extends Composite {
 		                    // Access the data of the selected row
 		                    final String email = selectedCerere.getEmail();
 		                    String message = selectedCerere.getMessage();
-
-		                    
+		                    int i = -1;
+		                    for (Button buttonNo : buttonListNo) {
+		                    	i++;
+		                        Object buttonData = (TableItem)button.getData();
+		                        // Compare the button's data with the specified data
+		                        if (buttonData.equals((TableItem) buttonNo.getData())) {
+		                            Button foundButton = buttonNo;
+		                            buttonListNo.remove(i);
+		                            buttonListYes.remove(i);
+		                            foundButton.dispose();
+		                            break; // Exit the loop if a matching button is found
+		                        }
+		                    }
 		                    // Perform actions with the data
 		                    System.out.println("Email: " + email);
 		                    System.out.println("Message: " + message);
+		                    button.dispose();
+
+		                 // Remove the buttons from the selected T
 		                    
-		                    
-		                    ContentProvider.cereri.removeIf(entry -> entry.getEmail().equals(email));
-		                    
-		                    table_1.remove(table_1.indexOf(selectedTableItem));
-		                    tableViewer.refresh();
+//		                    ContentProvider.cereri.removeIf(entry -> entry.getEmail().equals(email));
+//		                    
+//		                    table_1.remove(table_1.indexOf(selectedTableItem));
+//		                    tableViewer.refresh();
 
 		                }
 		            }
@@ -164,11 +181,47 @@ public class AdminPage extends Composite {
 			  
 			  final Button button = new Button(tableItem.getParent(), SWT.PUSH);
 			  button.setText("No");
+			  button.setData(tableItem);
+			  buttonListNo.add(button);
 			  button.addSelectionListener(new SelectionAdapter() {
 				  
 				  @Override
 				  public void widgetSelected(SelectionEvent e) {
-					  
+					  // Get the TableItem associated with the clicked button
+		                TableItem selectedTableItem = (TableItem) button.getData();
+		                if (selectedTableItem != null) {
+		                    // Get the corresponding data object (Cerere)
+		                    Cerere selectedCerere = (Cerere) selectedTableItem.getData();
+
+		                    // Access the data of the selected row
+		                    final String email = selectedCerere.getEmail();
+		                    String message = selectedCerere.getMessage();
+		                    int i = -1;
+		                    for (Button buttonYes : buttonListYes) {
+		                    	i++;
+		                        Object buttonData = (TableItem)button.getData();
+		                        // Compare the button's data with the specified data
+		                        if (buttonData.equals((TableItem) buttonYes.getData())) {
+		                            Button foundButton = buttonYes;
+		                            buttonListNo.remove(i);
+		                            buttonListYes.remove(i);
+		                            foundButton.dispose();
+		                            break; // Exit the loop if a matching button is found
+		                        }
+		                    }
+		                    // Perform actions with the data
+		                    System.out.println("Email: " + email);
+		                    System.out.println("Message: " + message);
+		                    button.dispose();
+
+		                 // Remove the buttons from the selected T
+		                    
+//		                    ContentProvider.cereri.removeIf(entry -> entry.getEmail().equals(email));
+//		                    
+//		                    table_1.remove(table_1.indexOf(selectedTableItem));
+//		                    tableViewer.refresh();
+
+		                }
 					  System.out.println("nay z");
 				  }
 			  });
