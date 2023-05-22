@@ -51,7 +51,6 @@ public class AdminPage extends Composite {
 	 */
 	public AdminPage(Composite parent, int style) throws SQLException {
 		super(parent, style);
-		
 		//table viewer
 		ContentProvider contentProvider = new ContentProvider();
 		
