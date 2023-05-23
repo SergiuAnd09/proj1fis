@@ -1,29 +1,33 @@
 package dbObjects;
 
+import java.util.Objects;
+
 public class Client {
 
+	private int id;
 	private String email;
 	private String parola;
-	private int id;
-	private boolean seller;
+	private int seller;
 
-	public Client(String email, String parola) {
+	public Client(int id, String email, String parola, int seller) {
 		super();
+		this.id = id;
 		this.email = email;
 		this.parola = parola;
-		id = hashCode();
+		this.seller = seller;
 	}
 	
-	public boolean getSeller() {
+	public int getSeller() {
 		
 		return this.seller;
 	}
 	
-	public void setSeller(boolean seller_approve) {
+	public void setSeller(int seller_approve) {
 		
 		this.seller=seller_approve;
-	}
+	} 
 	
+
 	public Client() {
 		super();
 	}
