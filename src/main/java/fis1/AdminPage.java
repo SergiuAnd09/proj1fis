@@ -264,6 +264,22 @@ public class AdminPage extends Composite {
 		btnLogout.setBounds(647, 404, 90, 30);
 		btnLogout.setText("Logout");
 		
+		Button btnSaleHistory = new Button(this, SWT.NONE);
+		btnSaleHistory.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					LayoutStack.getInstance().addLayout(8, new AdminPage2(LoginPage.getShell(), SWT.NONE));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				LayoutStack.getInstance().changeLayout(8);	
+			}
+		});
+		btnSaleHistory.setText("Sale History");
+		btnSaleHistory.setBounds(540, 404, 90, 30);
+		
 		tableViewer.setContentProvider(contentProvider);
 		  tableViewer.setInput(contentProvider.getElements(null));
 		

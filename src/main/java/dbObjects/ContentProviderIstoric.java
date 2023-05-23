@@ -22,7 +22,7 @@ public class ContentProviderIstoric implements IStructuredContentProvider{
 			ResultSet tot = takehistories.executeQuery();
 			istorii.clear();
 			while(tot.next()) {
-				IstoricVanzari istoric = new IstoricVanzari(tot.getInt("id"), tot.getString("nume"), tot.getFloat("pret"), tot.getString("email_cumparator"));
+				IstoricVanzari istoric = new IstoricVanzari(tot.getInt("id"), tot.getString("nume"), tot.getFloat("pret"), tot.getString("email_cumparator"), tot.getString("email_vanzator"));
 				istorii.add(istoric);
 			}
 			

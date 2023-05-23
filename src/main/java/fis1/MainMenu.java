@@ -45,15 +45,6 @@ public class MainMenu extends Composite {
 		btnRequestLicense.setBounds(58, 116, 145, 35);
 		btnRequestLicense.setText("Request Approval");
 		
-		Button btnViewSaleHistory = new Button(this, SWT.NONE);
-		btnViewSaleHistory.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnViewSaleHistory.setBounds(58, 157, 145, 35);
-		btnViewSaleHistory.setText("View Sale History");
-		
 		Button btnViewOffers = new Button(this, SWT.NONE);
 		btnViewOffers.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -93,7 +84,7 @@ public class MainMenu extends Composite {
 			}
 		});
 		btnLogout.setText("Logout");
-		btnLogout.setBounds(217, 157, 145, 35);
+		btnLogout.setBounds(276, 207, 145, 35);
 		
 		if (MainMenu.seller == 1) {
 			btnRequestLicense.setEnabled(false);

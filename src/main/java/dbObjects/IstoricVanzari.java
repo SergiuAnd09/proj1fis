@@ -6,6 +6,13 @@ public class IstoricVanzari {
 	private String nume;
 	private float pret;
 	private String email;
+	private String emailSeller;
+	public String getEmailSeller() {
+		return emailSeller;
+	}
+	public void setEmailSeller(String emailSeller) {
+		this.emailSeller = emailSeller;
+	}
 	public int getId() {
 		return id;
 	}
@@ -30,19 +37,21 @@ public class IstoricVanzari {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Override
-	public String toString() {
-		return "IstoricVanzari [id=" + id + ", nume=" + nume + ", pret=" + pret + ", email=" + email + "]";
-	}
 	public IstoricVanzari() {
 		super();
 	}
-	public IstoricVanzari(int id, String nume, float pret, String email) {
+	@Override
+	public String toString() {
+		return "IstoricVanzari [id=" + id + ", nume=" + nume + ", pret=" + pret + ", email=" + email + ", emailSeller="
+				+ emailSeller + "]";
+	}
+	public IstoricVanzari(int id, String nume, float pret, String email, String emailSeller) {
 		super();
 		this.id = id;
 		this.nume = nume;
 		this.pret = pret;
 		this.email = email;
+		this.emailSeller = emailSeller;
 	}
 	
 	
