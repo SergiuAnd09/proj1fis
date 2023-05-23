@@ -50,8 +50,14 @@ public class LoginPage {
 	 */
 	protected void createContents() throws SQLException {
 		shell = new Shell();
-		shell.setSize(600, 600);
+		shell.setSize(430, 300);
 		shell.setText("Login");
+//		shell.setSize(450, 300);
+//		shell.setText("Register");
+//		shell.setSize(650, 500);
+//		shell.setText("Admin Page");
+//		shell.setSize(450, 300);
+//		shell.setText("Main Menu");
 		
 		LayoutStack.createInstance(shell);
 

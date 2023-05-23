@@ -32,7 +32,7 @@ public class LoginMenu extends Composite {
 	 */
 	public LoginMenu(Composite parent, int style) {
 		super(parent, style);
-
+		
 		Label lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setBounds(29, 112, 90, 26);
 		lblNewLabel.setText("Password");
@@ -60,7 +60,8 @@ public class LoginMenu extends Composite {
 						display.timerExec(1500, new Runnable() {
 							public void run() {
 								LoginPage.getShell().setText("Main Menu");
-								LayoutStack.getInstance().changeLayout(2);
+								LayoutStack.getInstance().addLayout(3, new MainMenu(LoginPage.getShell(),SWT.NONE));
+								LayoutStack.getInstance().changeLayout(3);
 							}
 						});
 					}
@@ -113,6 +114,10 @@ public class LoginMenu extends Composite {
 
 			boolean userExists = resultSet.first(); // Checks if user exists in the result set
 
+			if (userExists) {
+			    MainMenu.seller = resultSet.getInt("seller");
+			}
+			
 			return userExists;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -51,7 +51,6 @@ public class AdminPage extends Composite {
 	 */
 	public AdminPage(Composite parent, int style) throws SQLException {
 		super(parent, style);
-		
 		//table viewer
 		ContentProvider contentProvider = new ContentProvider();
 		
@@ -139,14 +138,21 @@ public class AdminPage extends Composite {
 		                    System.out.println("Email: " + email);
 		                    System.out.println("Message: " + message);
 		                    button.dispose();
-
-		                 // Remove the buttons from the selected T
-		                    
-//		                    ContentProvider.cereri.removeIf(entry -> entry.getEmail().equals(email));
-//		                    
-//		                    table_1.remove(table_1.indexOf(selectedTableItem));
-//		                    tableViewer.refresh();
-
+		                    try {
+		                    Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
+                            PreparedStatement setSellerProperty = connection.prepareStatement("UPDATE users SET seller = 1 WHERE email = ?");
+                            setSellerProperty.setString(1,email);
+                            setSellerProperty.executeUpdate();
+                            setSellerProperty.close();
+                            PreparedStatement deleteRequest = connection.prepareStatement("DELETE FROM requests WHERE email = ?");
+                            deleteRequest.setString(1, email);
+                            deleteRequest.executeUpdate();
+                            deleteRequest.close();
+                            connection.close();
+                            System.out.println("Update successful.");
+		                    } catch (SQLException ex) {
+	                            ex.printStackTrace();
+		                    }
 		                }
 		            }
 		        });
@@ -188,13 +194,11 @@ public class AdminPage extends Composite {
 				  
 				  @Override
 				  public void widgetSelected(SelectionEvent e) {
-//<<<<<<< Updated upstream
 					  // Get the TableItem associated with the clicked button
 		                TableItem selectedTableItem = (TableItem) button.getData();
 		                if (selectedTableItem != null) {
 		                    // Get the corresponding data object (Cerere)
 		                    Cerere selectedCerere = (Cerere) selectedTableItem.getData();
-
 		                    // Access the data of the selected row
 		                    final String email = selectedCerere.getEmail();
 		                    String message = selectedCerere.getMessage();
@@ -211,25 +215,23 @@ public class AdminPage extends Composite {
 		                            break; // Exit the loop if a matching button is found
 		                        }
 		                    }
+		                    
 		                    // Perform actions with the data
 		                    System.out.println("Email: " + email);
 		                    System.out.println("Message: " + message);
 		                    button.dispose();
-
-		                 // Remove the buttons from the selected T
-		                    
-//		                    ContentProvider.cereri.removeIf(entry -> entry.getEmail().equals(email));
-//		                    
-//		                    table_1.remove(table_1.indexOf(selectedTableItem));
-//		                    tableViewer.refresh();
-
+		                    try {
+			                    Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
+	                            PreparedStatement deleteRequest = connection.prepareStatement("DELETE FROM requests WHERE email = ?");
+	                            deleteRequest.setString(1, email);
+	                            deleteRequest.executeUpdate();
+	                            deleteRequest.close();
+	                            connection.close();
+			                    System.out.println("Rejection successful.");
+			                    } catch (SQLException ex) {
+		                            ex.printStackTrace();
+			                    }
 		                }
-//=======
-					  //TableItem tt = new TableItem(table_1, SWT.NONE);
-//>>>>>>> Stashed changes
-					  System.out.println("nay z");
-					  //System.out.println(tt.getText(1));
-					  
 				  }
 			  });
 			  
@@ -244,7 +246,6 @@ public class AdminPage extends Composite {
 		            }
 		        });
 			  }
-			  
 			  });
 		
 		tableViewer.setContentProvider(contentProvider);
