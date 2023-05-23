@@ -20,7 +20,7 @@ public class ContentProviderIstoric implements IStructuredContentProvider{
 			Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
 			PreparedStatement takehistories = connection.prepareStatement("select * from sellhistory");
 			ResultSet tot = takehistories.executeQuery();
-			
+			istorii.clear();
 			while(tot.next()) {
 				IstoricVanzari istoric = new IstoricVanzari(tot.getInt("id"), tot.getString("nume"), tot.getFloat("pret"), tot.getString("email_cumparator"));
 				istorii.add(istoric);

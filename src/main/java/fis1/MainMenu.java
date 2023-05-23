@@ -67,6 +67,10 @@ public class MainMenu extends Composite {
 		btnViewMyAds.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				LoginPage.getShell().setText("My Ads");
+				LoginPage.getShell().setSize(650, 510);
+				LayoutStack.getInstance().changeLayout(5);
+				
 			}
 		});
 		btnViewMyAds.setText("View My Ads");
@@ -79,6 +83,7 @@ public class MainMenu extends Composite {
 				 LayoutStack.getInstance().deleteLayout(4);
 				 LayoutStack.getInstance().deleteLayout(1);
 				 LayoutStack.getInstance().deleteLayout(0);
+				 LayoutStack.getInstance().deleteLayout(5);
 				 LoginPage.getShell().setText("Login");
 				 LoginPage.getShell().setSize(430, 300);
 				 LayoutStack.getInstance().addLayout(0, new LoginMenu(LoginPage.getShell(), SWT.NONE));

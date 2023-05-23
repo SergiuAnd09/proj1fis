@@ -25,7 +25,7 @@ public class LayoutStack {
 		stack = new StackLayout();
 		shell.setLayout(stack);
 		
-		layouts = new Composite[5];
+		layouts = new Composite[10];
 		
 		layouts[0] = new LoginMenu(shell, SWT.NONE);
 		

@@ -74,6 +74,7 @@ public class LoginMenu extends Composite {
 								LoginPage.getShell().setSize(450, 300);
 								LayoutStack.getInstance().addLayout(3, new MainMenu(LoginPage.getShell(),SWT.NONE));
 								LayoutStack.getInstance().addLayout(4, new ApprovalRequest(LoginPage.getShell(),SWT.NONE));
+								LayoutStack.getInstance().addLayout(5, new MyAdsPage(LoginPage.getShell(),SWT.NONE));
 								LayoutStack.getInstance().changeLayout(3);
 							}
 						});
