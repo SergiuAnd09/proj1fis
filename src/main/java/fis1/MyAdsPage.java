@@ -169,6 +169,20 @@ public class MyAdsPage extends Composite {
 		btnBack.setBounds(501, 406, 90, 30);
 		btnBack.setText("Back");
 		
+		Button btnAdd = new Button(this, SWT.NONE);
+		btnAdd.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				LayoutStack.getInstance().addLayout(7, new AddNewProductPage(LoginPage.getShell(), SWT.NONE));
+				LoginPage.getShell().setText("Add New Product");
+				LoginPage.getShell().setSize(480, 280);
+				LayoutStack.getInstance().changeLayout(7);
+				
+			}
+		});
+		btnAdd.setBounds(354, 406, 129, 30);
+		btnAdd.setText("Add New Product");
+		
 		tableViewer.setContentProvider(contentProvider);
 		tableViewer.setInput(contentProvider.getElements(null));
 	}
