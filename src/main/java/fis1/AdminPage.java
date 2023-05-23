@@ -35,6 +35,8 @@ import org.eclipse.jface.viewers.ViewerCell;
 
 import dbObjects.Cerere;
 import dbObjects.ContentProvider;
+import ui.LayoutStack;
+
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -57,14 +59,14 @@ public class AdminPage extends Composite {
 		
 		final TableViewer tableViewer = new TableViewer(this, SWT.BORDER | SWT.FULL_SELECTION);
 		table_1 = tableViewer.getTable();
-		table_1.setBounds(33, 65, 560, 330);
+		table_1.setBounds(33, 65, 704, 330);
 		
 		  
 		 
 		
 		final TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		final TableColumn tblclmnEmail = tableViewerColumn.getColumn();
-		tblclmnEmail.setWidth(100);
+		tblclmnEmail.setWidth(150);
 		tblclmnEmail.setText("email");
 		
 		tableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
@@ -78,7 +80,7 @@ public class AdminPage extends Composite {
 		
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnMessage = tableViewerColumn_1.getColumn();
-		tblclmnMessage.setWidth(100);
+		tblclmnMessage.setWidth(350);
 		tblclmnMessage.setText("message");
 		
 				tableViewerColumn_1.setLabelProvider(new ColumnLabelProvider() {
@@ -247,6 +249,20 @@ public class AdminPage extends Composite {
 		        });
 			  }
 			  });
+		
+		Button btnLogout = new Button(this, SWT.NONE);
+		btnLogout.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				LoginPage.getShell().setText("Login");
+				LoginPage.getShell().setSize(430, 300);
+				LayoutStack.getInstance().deleteLayout(0);
+				LayoutStack.getInstance().addLayout(0, new LoginMenu(LoginPage.getShell(), SWT.NONE));
+				LayoutStack.getInstance().changeLayout(0);
+			}
+		});
+		btnLogout.setBounds(647, 404, 90, 30);
+		btnLogout.setText("Logout");
 		
 		tableViewer.setContentProvider(contentProvider);
 		  tableViewer.setInput(contentProvider.getElements(null));

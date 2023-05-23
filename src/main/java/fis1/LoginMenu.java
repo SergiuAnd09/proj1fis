@@ -13,6 +13,9 @@ import java.sql.SQLException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
+
+import dbObjects.ContentProvider;
+
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -23,7 +26,7 @@ public class LoginMenu extends Composite {
 	private Text text;
 	private Text textEmail;
 	private Text textPassword;
-
+	public static String email;
 	/**
 	 * Create the composite.
 	 * 
@@ -49,7 +52,15 @@ public class LoginMenu extends Composite {
 					Display display = lblFeedback.getDisplay();
 					display.timerExec(1500, new Runnable() {
 						public void run() {
+							LayoutStack.getInstance().deleteLayout(2);
+							try {
+								LayoutStack.getInstance().addLayout(2, new AdminPage(LoginPage.getShell(), SWT.NONE));
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							LoginPage.getShell().setText("Admin Page");
+							LoginPage.getShell().setSize(790, 510);
 							LayoutStack.getInstance().changeLayout(2);
 						}
 					});
@@ -60,7 +71,9 @@ public class LoginMenu extends Composite {
 						display.timerExec(1500, new Runnable() {
 							public void run() {
 								LoginPage.getShell().setText("Main Menu");
+								LoginPage.getShell().setSize(450, 300);
 								LayoutStack.getInstance().addLayout(3, new MainMenu(LoginPage.getShell(),SWT.NONE));
+								LayoutStack.getInstance().addLayout(4, new ApprovalRequest(LoginPage.getShell(),SWT.NONE));
 								LayoutStack.getInstance().changeLayout(3);
 							}
 						});
@@ -78,6 +91,7 @@ public class LoginMenu extends Composite {
 		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				LoginPage.getShell().setSize(450, 300);
 				LoginPage.getShell().setText("Register");
 				LayoutStack.getInstance().changeLayout(1);
 			}
@@ -116,6 +130,7 @@ public class LoginMenu extends Composite {
 
 			if (userExists) {
 			    MainMenu.seller = resultSet.getInt("seller");
+			    LoginMenu.email = resultSet.getString("email");
 			}
 			
 			return userExists;

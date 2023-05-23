@@ -38,10 +38,12 @@ public class MainMenu extends Composite {
 		btnRequestLicense.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				LoginPage.getShell().setText("Approval Request");
+				LayoutStack.getInstance().changeLayout(4);
 			}
 		});
 		btnRequestLicense.setBounds(58, 116, 145, 35);
-		btnRequestLicense.setText("Request License");
+		btnRequestLicense.setText("Request Approval");
 		
 		Button btnViewSaleHistory = new Button(this, SWT.NONE);
 		btnViewSaleHistory.addSelectionListener(new SelectionAdapter() {
@@ -74,20 +76,13 @@ public class MainMenu extends Composite {
 		btnLogout.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				 LayoutStack.getInstance().deleteLayout(2);
+				 LayoutStack.getInstance().deleteLayout(4);
 				 LayoutStack.getInstance().deleteLayout(1);
 				 LayoutStack.getInstance().deleteLayout(0);
 				 LoginPage.getShell().setText("Login");
 				 LoginPage.getShell().setSize(430, 300);
 				 LayoutStack.getInstance().addLayout(0, new LoginMenu(LoginPage.getShell(), SWT.NONE));
 				 LayoutStack.getInstance().addLayout(1, new RegisterPage(LoginPage.getShell(), SWT.NONE));
-				 try {
-					LayoutStack.getInstance().addLayout(2, new AdminPage(LoginPage.getShell(), SWT.NONE));
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				 
 				 LayoutStack.getInstance().changeLayout(0);
 				 LayoutStack.getInstance().deleteLayout(3);
 			}

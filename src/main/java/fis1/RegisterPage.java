@@ -37,6 +37,9 @@ public class RegisterPage extends Composite {
 
         passwordTxt = new Text(this, SWT.BORDER | SWT.PASSWORD);
         passwordTxt.setBounds(173, 78, 202, 28);
+        
+        passwordConfirmTxt = new Text(this, SWT.BORDER | SWT.PASSWORD);
+        passwordConfirmTxt.setBounds(173, 118, 202, 28);
 
         final Label warningLabel = new Label(this, SWT.CENTER);
         warningLabel.setText("");
@@ -118,6 +121,7 @@ public class RegisterPage extends Composite {
                             display.timerExec(1500, new Runnable() {
                                 public void run() {
                                 	LoginPage.getShell().setText("Login");
+                                	LoginPage.getShell().setSize(430, 300);
                                     LayoutStack.getInstance().changeLayout(0);
                                     emailTxt.setText("");
                                     passwordTxt.setText("");
@@ -152,6 +156,7 @@ public class RegisterPage extends Composite {
 
         });
 
+
         registerButton.setBounds(77, 200, 136, 35);
         registerButton.setText("Register");
 
@@ -160,6 +165,7 @@ public class RegisterPage extends Composite {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 LoginPage.getShell().setText("Login");
+                LoginPage.getShell().setSize(430, 300);
                 LayoutStack.getInstance().changeLayout(0);
             }
         });
@@ -180,10 +186,6 @@ public class RegisterPage extends Composite {
         lblConfirmPassword.setAlignment(SWT.RIGHT);
         lblConfirmPassword.setText("Confirm Password");
         lblConfirmPassword.setBounds(1, 121, 157, 25);
-
-        passwordConfirmTxt = new Text(this, SWT.BORDER | SWT.PASSWORD);
-        passwordConfirmTxt.setBounds(173, 118, 202, 28);
-
     }
 
     public boolean isValidEmail(String email) {
