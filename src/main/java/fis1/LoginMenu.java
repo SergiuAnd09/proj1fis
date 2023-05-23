@@ -87,6 +87,8 @@ public class LoginMenu extends Composite {
 		btnNewButton.setBounds(80, 199, 120, 43);
 		btnNewButton.setText("Login");
 
+		//test
+		
 		Button btnNewButton_1 = new Button(this, SWT.NONE);
 		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
 			@Override
