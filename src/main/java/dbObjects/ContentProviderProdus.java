@@ -23,14 +23,14 @@ public class ContentProviderProdus implements IStructuredContentProvider{
 				ResultSet nume = takenume.executeQuery();
 				PreparedStatement takepret = connection.prepareStatement("select pret from products");
 				ResultSet preturi = takepret.executeQuery();
-				PreparedStatement takeidvanz = connection.prepareStatement("seelct id_vanzator from products");
-				ResultSet idurivanz = takeidvanz.executeQuery();
+				PreparedStatement takeemail = connection.prepareStatement("seelct email from products");
+				ResultSet emailuri = takeemail.executeQuery();
 				PreparedStatement takedescriere = connection.prepareStatement("select descriere from products");
 				ResultSet descrieri = takedescriere.executeQuery();
 				
-				while(iduri.next() && nume.next() && preturi.next() && idurivanz.next() && descrieri.next()) {
+				while(iduri.next() && nume.next() && preturi.next() && emailuri.next() && descrieri.next()) {
 					
-					Produs produs = new Produs(iduri.getInt("id"), nume.getString("nume"), preturi.getFloat("pret"), idurivanz.getInt("id_vanzator"), descrieri.getString("descriere"));
+					Produs produs = new Produs(iduri.getInt("id"), nume.getString("nume"), preturi.getFloat("pret"), emailuri.getString("id_vanzator"), descrieri.getString("descriere"));
 					produse.add(produs);
 				}
 				
@@ -40,8 +40,8 @@ public class ContentProviderProdus implements IStructuredContentProvider{
 				takenume.close();
 				preturi.close();
 				takepret.close();
-				idurivanz.close();
-				takeidvanz.close();
+				emailuri.close();
+				takeemail.close();
 				descrieri.close();
 				takedescriere.close();
 				connection.close();

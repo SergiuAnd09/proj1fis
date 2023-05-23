@@ -7,8 +7,15 @@ public class Produs {
 	private int id;
 	private String nume;
 	private float pret;
-	private int id_vanzator;
+	private String email;
 	private String descriere;
+	private float pret_minim;
+	public float getPret_minim() {
+		return pret_minim;
+	}
+	public void setPret_minim(float pret_minim) {
+		this.pret_minim = pret_minim;
+	}
 	public int getId() {
 		return id;
 	}
@@ -27,11 +34,30 @@ public class Produs {
 	public void setPret(float pret) {
 		this.pret = pret;
 	}
-	public int getId_vanzator() {
-		return id_vanzator;
+	
+	public Produs(int id, String nume, float pret, String email, String descriere) {
+		super();
+		this.id = id;
+		this.nume = nume;
+		this.pret = pret;
+		this.email = email;
+		this.descriere = descriere;
+		this.pret_minim=-1;
 	}
-	public void setId_vanzator(int id_vanzator) {
-		this.id_vanzator = id_vanzator;
+	public Produs(int id, String nume, float pret, String email, String descriere, float pret_minim) {
+		super();
+		this.id = id;
+		this.nume = nume;
+		this.pret = pret;
+		this.email = email;
+		this.descriere = descriere;
+		this.pret_minim = pret_minim;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getDescriere() {
 		return descriere;
@@ -39,21 +65,14 @@ public class Produs {
 	public void setDescriere(String descriere) {
 		this.descriere = descriere;
 	}
-	public Produs(int id, String nume, float pret, int id_vanzator, String descriere) {
-		super();
-		this.id = id;
-		this.nume = nume;
-		this.pret = pret;
-		this.id_vanzator = id_vanzator;
-		this.descriere = descriere;
-	}
+
 	public Produs() {
 		super();
 	}
 	@Override
 	public String toString() {
-		return "Produs [id=" + id + ", nume=" + nume + ", pret=" + pret + ", id_vanzator=" + id_vanzator
-				+ ", descriere=" + descriere + "]";
+		return "Produs [id=" + id + ", nume=" + nume + ", pret=" + pret + ", email=" + email + ", descriere="
+				+ descriere + ", pret_minim=" + pret_minim + "]";
 	}
 	
 	
