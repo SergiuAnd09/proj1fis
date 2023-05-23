@@ -18,25 +18,17 @@ public class ContentProvider implements IStructuredContentProvider {
 	public ContentProvider() {
 		try {
 			Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-			PreparedStatement takemails = connection.prepareStatement("select email from requests");
-			ResultSet emailuri = takemails.executeQuery();
-			PreparedStatement takemessages = connection.prepareStatement("select message from requests");
-			ResultSet mesaje = takemessages.executeQuery();
+			PreparedStatement takerequests = connection.prepareStatement("select * from requests");
+			ResultSet tot = takerequests.executeQuery();
 			cereri.clear();
-			while (emailuri.next() && mesaje.next()) {
-				String email = emailuri.getString("email");
-				String mesaj = mesaje.getString("message");
-				Cerere cerere = new Cerere();
-				cerere.setEmail(email);
-				cerere.setMessage(mesaj);
+			
+			while (tot.next()) {
+				Cerere cerere = new Cerere(tot.getString("email"), tot.getString("message"));
 				cereri.add(cerere);
 			}
-			//System.out.println(cereri);
-			// Close the resources
-			mesaje.close();
-			takemessages.close();
-			emailuri.close();
-			takemails.close();
+	
+			tot.close();
+			takerequests.close();
 			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -17,28 +17,17 @@ public class ContentProviderClient implements IStructuredContentProvider {
 		
 		try {
 			Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-			PreparedStatement takeid = connection.prepareStatement("select id from users");
-			ResultSet iduri = takeid.executeQuery();
-			PreparedStatement takeemail = connection.prepareStatement("select email from users");
-			ResultSet emailuri = takeemail.executeQuery();
-			PreparedStatement takepassword = connection.prepareStatement("select password from users");
-			ResultSet parole = takepassword.executeQuery();
-			PreparedStatement takeseller = connection.prepareStatement("select seller from users");
-			ResultSet selleri = takeseller.executeQuery();
+			PreparedStatement takeusers = connection.prepareStatement("select * from users");
+			ResultSet tot = takeusers.executeQuery();
+			clienti.clear();
 			
-			while(iduri.next() && emailuri.next() && parole.next() && selleri.next()) {
-				Client client = new Client(iduri.getInt("id"), emailuri.getString("email"), parole.getString("password"), selleri.getInt("seller"));
+			while(tot.next()) {
+				Client client = new Client(tot.getString("email"), tot.getString("password"), tot.getInt("seller"));
 				clienti.add(client);
 			}
 			
-			iduri.close();
-			takeid.close();
-			emailuri.close();
-			takeemail.close();
-			parole.close();
-			takepassword.close();
-			selleri.close();
-			takeseller.close();
+			tot.close();
+			takeusers.close();
 			connection.close();
 		}
 		catch(Exception e) {

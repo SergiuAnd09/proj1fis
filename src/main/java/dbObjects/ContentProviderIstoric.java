@@ -18,24 +18,16 @@ public class ContentProviderIstoric implements IStructuredContentProvider{
 		
 		try {
 			Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-			PreparedStatement takeidp = connection.prepareStatement("select id_produs from sellhistory");
-			ResultSet idurip = takeidp.executeQuery();
-			PreparedStatement takepret = connection.prepareStatement("select pret from sellhistory");
-			ResultSet preturi = takepret.executeQuery();
-			PreparedStatement takeidc = connection.prepareStatement("select id_cumparator from sellhistory");
-			ResultSet iduric = takeidc.executeQuery();
+			PreparedStatement takehistories = connection.prepareStatement("select * from sellhistory");
+			ResultSet tot = takehistories.executeQuery();
 			
-			while(idurip.next() && preturi.next() && iduric.next()) {
-				IstoricVanzari istoric = new IstoricVanzari(idurip.getInt("id_produs"), preturi.getFloat("pret"), iduric.getInt("id_cumparator"));
+			while(tot.next()) {
+				IstoricVanzari istoric = new IstoricVanzari(tot.getInt("id"), tot.getString("nume"), tot.getFloat("pret"), tot.getString("email_cumparator"));
 				istorii.add(istoric);
 			}
 			
-			idurip.close();
-			takeidp.close();
-			preturi.close();
-			takepret.close();
-			iduric.close();
-			takeidc.close();
+			tot.close();
+			takehistories.close();
 			connection.close();
 		}
 		

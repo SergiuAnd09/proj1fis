@@ -17,25 +17,17 @@ public class ContentProviderOferta implements IStructuredContentProvider{
 		
 		try {
 			Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-			PreparedStatement takeidp = connection.prepareStatement("select id_produs from offers");
-			ResultSet idurip = takeidp.executeQuery();
-			PreparedStatement takeidc = connection.prepareStatement("select id_cumparator from offers");
-			ResultSet iduric = takeidc.executeQuery();
-			PreparedStatement takepret = connection.prepareStatement("select pret from offers");
-			ResultSet preturi = takepret.executeQuery();
-			
-			while(idurip.next() && iduric.next() && preturi.next()) {
+			PreparedStatement takeoffers = connection.prepareStatement("select * from offers");
+			ResultSet tot = takeoffers.executeQuery();
+			oferte.clear();
+			while(tot.next()) {
 				
-				Oferta oferta = new Oferta(idurip.getInt("id_produs"), iduric.getInt("id_cumparator"), preturi.getFloat("pret"));
+				Oferta oferta = new Oferta(tot.getInt("id_produs"), tot.getString("email"), tot.getFloat("pret"));
 				oferte.add(oferta);
 			}
 			
-			idurip.close();
-			takeidp.close();
-			iduric.close();
-			takeidc.close();
-			preturi.close();
-			takepret.close();
+			tot.close();
+			takeoffers.close();
 			connection.close();
 		}
 		catch(Exception e) {

@@ -17,33 +17,17 @@ public class ContentProviderProdus implements IStructuredContentProvider{
 		public ContentProviderProdus() {
 			try {
 				Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-				PreparedStatement takeid = connection.prepareStatement("select id from products");
-				ResultSet iduri = takeid.executeQuery();
-				PreparedStatement takenume = connection.prepareStatement("select nume from products");
-				ResultSet nume = takenume.executeQuery();
-				PreparedStatement takepret = connection.prepareStatement("select pret from products");
-				ResultSet preturi = takepret.executeQuery();
-				PreparedStatement takeemail = connection.prepareStatement("seelct email from products");
-				ResultSet emailuri = takeemail.executeQuery();
-				PreparedStatement takedescriere = connection.prepareStatement("select descriere from products");
-				ResultSet descrieri = takedescriere.executeQuery();
+				PreparedStatement takeproducts = connection.prepareStatement("select * from products");
+				ResultSet tot = takeproducts.executeQuery();
+				produse.clear();
 				
-				while(iduri.next() && nume.next() && preturi.next() && emailuri.next() && descrieri.next()) {
-					
-					Produs produs = new Produs(iduri.getInt("id"), nume.getString("nume"), preturi.getFloat("pret"), emailuri.getString("id_vanzator"), descrieri.getString("descriere"));
-					produse.add(produs);
+				while(tot.next()) {
+					 Produs produs = new Produs(tot.getInt("id"), tot.getString("nume"),tot.getFloat("pret"), tot.getString("email"),tot.getString("descriere"));
+					 produse.add(produs);
 				}
 				
-				iduri.close();
-				takeid.close();
-				nume.close();
-				takenume.close();
-				preturi.close();
-				takepret.close();
-				emailuri.close();
-				takeemail.close();
-				descrieri.close();
-				takedescriere.close();
+				tot.close();
+				takeproducts.close();
 				connection.close();
 				
 			}

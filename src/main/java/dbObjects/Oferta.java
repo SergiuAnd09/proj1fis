@@ -3,7 +3,7 @@ package dbObjects;
 public class Oferta {
 	
 	private int id_produs;
-	private int id_cumparator;
+	private String email;
 	private float pret;
 	public int getId_produs() {
 		return id_produs;
@@ -11,13 +11,19 @@ public class Oferta {
 	public void setId_produs(int id_produs) {
 		this.id_produs = id_produs;
 	}
-	public int getId_cumparator() {
-		return id_cumparator;
+		public Oferta(int id_produs, String email, float pret) {
+		super();
+		this.id_produs = id_produs;
+		this.email = email;
+		this.pret = pret;
 	}
-	public void setId_cumparator(int id_cumparator) {
-		this.id_cumparator = id_cumparator;
+		public String getEmail() {
+		return email;
 	}
-	public float getPret() {
+	public void setEmail(String email) {
+		this.email = email;
+	}
+		public float getPret() {
 		return pret;
 	}
 	public void setPret(float pret) {
@@ -26,15 +32,10 @@ public class Oferta {
 	public Oferta() {
 		super();
 	}
-	public Oferta(int id_produs, int id_cumparator, float pret) {
-		super();
-		this.id_produs = id_produs;
-		this.id_cumparator = id_cumparator;
-		this.pret = pret;
-	}
+	
 	@Override
 	public String toString() {
-		return "Oferta [id_produs=" + id_produs + ", id_cumparator=" + id_cumparator + ", pret=" + pret + "]";
+		return "Oferta [id_produs=" + id_produs + ", email=" + email + ", pret=" + pret + "]";
 	}
 	
 	

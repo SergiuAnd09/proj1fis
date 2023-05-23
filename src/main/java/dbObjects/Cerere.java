@@ -45,20 +45,4 @@ public class Cerere {
 		return "[Email:"+ email + " Message:"+message+ "]";
 	}
 	
-	/*
-	 * public Button createButton(Composite AdminPage) { Button button = new
-	 * Button((org.eclipse.swt.widgets.Composite) AdminPage, SWT.NONE);
-	 * button.setText("Yes"); button.addSelectionListener(new SelectionAdapter() {
-	 * 
-	 * @Override public void widgetSelected(SelectionEvent e) { // Code to accept
-	 * the request System.out.println("Yay");
-	 * 
-	 * } }); return button; }
-	 */
-	
-	/*
-	 * public Button YesButton() {
-	 * 
-	 * Button yes = new Button(); }
-	 */
 }
