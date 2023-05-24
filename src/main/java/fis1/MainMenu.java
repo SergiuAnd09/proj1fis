@@ -29,6 +29,11 @@ public class MainMenu extends Composite {
 		btnViewProducts.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				
+				LayoutStack.getInstance().addLayout(6, new ViewProductsPage(LoginPage.getShell(), SWT.NONE));
+				LoginPage.getShell().setText("View Products");
+				LoginPage.getShell().setSize(900, 650);
+    			LayoutStack.getInstance().changeLayout(6);
 			}
 		});
 		btnViewProducts.setBounds(58, 75, 145, 35);
