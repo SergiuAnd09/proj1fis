@@ -17,12 +17,12 @@ public class ContentProviderOferta implements IStructuredContentProvider{
 		
 		try {
 			Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-			PreparedStatement takeoffers = connection.prepareStatement("select * from offers");
+			PreparedStatement takeoffers = connection.prepareStatement("select * from offers ORDER BY name ASC, pret DESC");
 			ResultSet tot = takeoffers.executeQuery();
 			oferte.clear();
 			while(tot.next()) {
 				
-				Oferta oferta = new Oferta(tot.getInt("id_produs"), tot.getString("email"), tot.getFloat("pret"));
+				Oferta oferta = new Oferta(tot.getInt("id_produs"), tot.getString("email"), tot.getFloat("pret"), tot.getString("email_vanzator"), tot.getString("name"));
 				oferte.add(oferta);
 			}
 			

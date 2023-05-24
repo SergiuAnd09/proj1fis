@@ -49,6 +49,15 @@ public class MainMenu extends Composite {
 		btnViewOffers.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				LoginPage.getShell().setText("My Offers");
+				LoginPage.getShell().setSize(790, 510);
+				 try {
+						LayoutStack.getInstance().addLayout(10, new OffersPage(LoginPage.getShell(),SWT.NONE));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				LayoutStack.getInstance().changeLayout(10);
 			}
 		});
 		btnViewOffers.setText("View Offers");
@@ -61,7 +70,6 @@ public class MainMenu extends Composite {
 				LoginPage.getShell().setText("My Ads");
 				LoginPage.getShell().setSize(650, 510);
 				LayoutStack.getInstance().changeLayout(5);
-				
 			}
 		});
 		btnViewMyAds.setText("View My Ads");
