@@ -39,6 +39,7 @@ public class ViewProductsPage extends Composite {
 	private Table table;
 	public static TableItem selectedTableItem=null;
 	public static float pret_min=0;
+	public static Produs selectedProdus;
 
 	/**
 	 * Create the composite.
@@ -51,24 +52,23 @@ public class ViewProductsPage extends Composite {
 		
 		TableViewer tableViewer = new TableViewer(this, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tableViewer.getTable();
-		table.setBounds(79, 121, 625, 304);
-		
+		table.setBounds(33, 65, 704, 330);
 		TableViewerColumn colnume = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNume = colnume.getColumn();
-		tblclmnNume.setWidth(100);
+		tblclmnNume.setWidth(150);
 		tblclmnNume.setText("nume");
 		colnume.setLabelProvider(new ColumnLabelProvider() {
 			
 			@Override
 			public String getText(Object element) {
 				Produs produs = (Produs) element;
-				return produs.getEmail();
+				return produs.getNume();
 			}
 		});
 		
 		TableViewerColumn coldescriere = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnDescriere = coldescriere.getColumn();
-		tblclmnDescriere.setWidth(100);
+		tblclmnDescriere.setWidth(150);
 		tblclmnDescriere.setText("descriere");
 		coldescriere.setLabelProvider(new ColumnLabelProvider() {
 			
@@ -105,7 +105,7 @@ public class ViewProductsPage extends Composite {
 				TableItem item = (TableItem) cell.getItem();
 				final TableEditor editor = new TableEditor(item.getParent());
 				final Button button = new Button(item.getParent(), SWT.PUSH);
-		        button.setText("Oferteaza");
+		        button.setText("Buy");
 		        button.setData(item);
 		        
 		        button.addSelectionListener(new SelectionAdapter() {
@@ -113,31 +113,37 @@ public class ViewProductsPage extends Composite {
 		        	
 		        	@Override
 		        	public void widgetSelected(SelectionEvent e) {
-		        		
-						Connection connection = null;
 		        		selectedTableItem = (TableItem) button.getData();
-		        		ResultSet rs = null;
-		        		Produs produs = (Produs) selectedTableItem.getData();
-		        		 
-		        		 try {
-		        			 String sql = "insert into offers values (?,?,?,?,?)";
-		        			 connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-							PreparedStatement introducereOferte = connection.prepareStatement(sql);
-							introducereOferte.setInt(1, produs.getId());
-							introducereOferte.setString(2, LoginMenu.email);
-							introducereOferte.setFloat(3, produs.getPret());
-							introducereOferte.setString(4, produs.getEmail());
-							introducereOferte.setString(5, produs.getNume());
-							
-							introducereOferte.executeUpdate();
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-		        		
+		        		Produs selectedProduct = (Produs) selectedTableItem.getData();
+		        			 try {
+				                    Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
+				                    PreparedStatement logPurchase = connection.prepareStatement("INSERT INTO sellhistory (id, nume, pret, email_cumparator, email_vanzator) VALUES (?,?,?,?,?)");
+				                    logPurchase.setInt(1, selectedProduct.getId());
+				                    logPurchase.setString(2, selectedProduct.getNume());
+				                    logPurchase.setFloat(3, selectedProduct.getPret());
+				                    logPurchase.setString(4, LoginMenu.email);
+				                    logPurchase.setString(5, selectedProduct.getEmail());
+				                    logPurchase.executeUpdate();
+				                    logPurchase.close();
+		                            PreparedStatement deleteOffer = connection.prepareStatement("DELETE FROM offers WHERE email_vanzator = ? AND name = ?");
+		                            deleteOffer.setString(1, selectedProduct.getEmail());
+		                            deleteOffer.setString(2, selectedProduct.getNume());
+		                            deleteOffer.executeUpdate();
+		                            deleteOffer.close();
+		                            PreparedStatement deleteProduct = connection.prepareStatement("DELETE FROM products WHERE email = ? AND nume = ?");
+		                            deleteProduct.setString(1, selectedProduct.getEmail());
+		                            deleteProduct.setString(2, selectedProduct.getNume());
+		                            deleteProduct.executeUpdate();
+		                            deleteProduct.close();
+		                            connection.close();
+				                    } catch (SQLException ex) {
+			                            ex.printStackTrace();
+				                    }
+			                    LayoutStack.getInstance().changeLayout(3);
+	                            LayoutStack.getInstance().deleteLayout(6);
+	                            LayoutStack.getInstance().addLayout(6, new ViewProductsPage(LoginPage.getShell(),SWT.NONE));
+	                			LayoutStack.getInstance().changeLayout(6);
 		        	}
-		        	
-		        	
 		        });
 		        
 				  editor.grabHorizontal = true;
@@ -165,7 +171,7 @@ public class ViewProductsPage extends Composite {
 				final Button button = new Button(item.getParent(), SWT.PUSH);
 				
 				final TableEditor editor = new TableEditor(item.getParent());
-		        button.setText("Negociaza");
+		        button.setText("Offer");
 		        button.setData(item);
 		        selectedTableItem = (TableItem) button.getData();
 				Produs produs = (Produs) ViewProductsPage.selectedTableItem.getData();
@@ -179,8 +185,9 @@ public class ViewProductsPage extends Composite {
 		        	@Override
 		        	public void widgetSelected(SelectionEvent e) {
 		        		
-		        		pret_min = produs.getPret_minim();
-		        		
+		        			pret_min = produs.getPret_minim();
+		        			TableItem selectedTableItem = (TableItem) button.getData();
+			                selectedProdus = (Produs)selectedTableItem.getData();
 		        			LayoutStack.getInstance().addLayout(9, new NegotiatePage(LoginPage.getShell(), SWT.NONE));
 							LoginPage.getShell().setText("NegotiatePage");
 							LoginPage.getShell().setSize(600, 500);
@@ -212,7 +219,7 @@ public class ViewProductsPage extends Composite {
 		        final TableItem item = (TableItem) cell.getItem();
 		        final TableEditor editor = new TableEditor(item.getParent());
 		        final Button button = new Button(item.getParent(), SWT.PUSH);
-		        button.setText("Sterge");
+		        button.setText("Delete Offer");
 		        button.setData(item);
 
 		        button.addSelectionListener(new SelectionAdapter() {
@@ -233,7 +240,7 @@ public class ViewProductsPage extends Composite {
 								//mesaj
 								MessageBox messageBox = new MessageBox(LoginPage.shell, SWT.ICON_INFORMATION | SWT.OK);
 			        	        messageBox.setText("Announcement");
-			        	        messageBox.setMessage("Stergere efectuata!");
+			        	        messageBox.setMessage("Offer deleted!");
 			        	        int result = messageBox.open();
 			        	        if (result == SWT.OK) {}
 							} catch (SQLException e1) {
@@ -267,7 +274,7 @@ public class ViewProductsPage extends Composite {
 				LayoutStack.getInstance().changeLayout(3);
 			}
 		});
-		btnNewButton.setBounds(521, 452, 90, 39);
+		btnNewButton.setBounds(647, 404, 90, 30);
 		btnNewButton.setText("Back");
 		
 		//aici se dau datele catre tableviewer care se ocupa de distrubutia lor catre labelproviderurile fiecarei coloane

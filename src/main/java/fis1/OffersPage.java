@@ -141,7 +141,7 @@ public class OffersPage extends Composite {
 			                    logPurchase.setString(5, selectedProduct.getEmail_vanzator());
 			                    logPurchase.executeUpdate();
 			                    logPurchase.close();
-	                            PreparedStatement deleteOffer = connection.prepareStatement("DELETE FROM offers WHERE email_vanzator = ? AND nume = ?");
+	                            PreparedStatement deleteOffer = connection.prepareStatement("DELETE FROM offers WHERE email_vanzator = ? AND name = ?");
 	                            deleteOffer.setString(1, emailSeller);
 	                            deleteOffer.setString(2, name);
 	                            deleteOffer.executeUpdate();

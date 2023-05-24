@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import fis1.DBConnection;
+import fis1.LoginMenu;
 
 
 public class ContentProviderProdus implements IStructuredContentProvider{
@@ -38,10 +39,10 @@ public class ContentProviderProdus implements IStructuredContentProvider{
 		public ContentProviderProdus() {
 			try {
 				Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-				PreparedStatement takeproducts = connection.prepareStatement("select * from products");
+				PreparedStatement takeproducts = connection.prepareStatement("select * from products where not email=?");
+				takeproducts.setString(1, LoginMenu.email);
 				ResultSet tot = takeproducts.executeQuery();
 				produse.clear();
-				
 				while(tot.next()) {
 					 Produs produs = new Produs(tot.getInt("id"), tot.getString("nume"),tot.getFloat("pret"), tot.getString("email"),tot.getString("descriere"),tot.getFloat("pret_minim"));
 					 produse.add(produs);

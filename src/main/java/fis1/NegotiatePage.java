@@ -38,7 +38,7 @@ public class NegotiatePage extends Composite {
 		super(parent, style);
 		
 		text = new Text(this, SWT.BORDER);
-		text.setBounds(154, 146, 124, 45);
+		text.setBounds(155, 155, 124, 26);
 		//se face atribuirea la suma
 		//suma = Integer.parseInt(text.getText());
 		
@@ -48,7 +48,7 @@ public class NegotiatePage extends Composite {
 		
 		Label lblNewLabel_1 = new Label(this, SWT.NONE);
 		lblNewLabel_1.setBounds(44, 29, 371, 102);
-		lblNewLabel_1.setText("Atentie! Introduceti cu grija suma dorita, \r\nsumele sub minimul setat de vanzator vor fii \r\nautomat ignorate, iar apasarea butonului \"Incearca\" \r\nnu garanteaza trimiterea ofertei daca minimul banesc \r\nnu este satisfacut.");
+		lblNewLabel_1.setText("Atentie! Introduceti cu grija suma dorita, \r\nsumele sub minimul setat de vanzator vor fii \r\nautomat ignorate, iar apasarea butonului \"Submit\" \r\nnu garanteaza trimiterea ofertei daca minimul banesc \r\nnu este satisfacut.");
 		
 		Button btnBack = new Button(this, SWT.NONE);
 		btnBack.addSelectionListener(new SelectionAdapter() {
@@ -59,14 +59,15 @@ public class NegotiatePage extends Composite {
 				LayoutStack.getInstance().changeLayout(6);
 			}
 		});
-		btnBack.setBounds(298, 230, 103, 45);
+		btnBack.setBounds(223, 210, 103, 45);
 		btnBack.setText("Back");
 		
 		Button btnNewButton = new Button(this, SWT.NONE);
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Produs produs = (Produs)ViewProductsPage.selectedTableItem.getData();
+				
+				Produs produs = ViewProductsPage.selectedProdus;
 				Connection connec=null;
 				ResultSet rs=null;
 				try {
@@ -81,7 +82,7 @@ public class NegotiatePage extends Composite {
 				}
 				
 				
-				if(Float.parseFloat(text.getText())<ViewProductsPage.pret_min) {;}//verificare sa avem produs negociabil	 
+				if(Float.parseFloat(text.getText()) < produs.getPret_minim()) {;}//verificare sa avem produs negociabil	 
  else
 					try {
 						if(rs.next()) {
@@ -119,8 +120,8 @@ public class NegotiatePage extends Composite {
 					
 			
 		});
-		btnNewButton.setBounds(298, 146, 103, 45);
-		btnNewButton.setText("Try");
+		btnNewButton.setBounds(78, 210, 103, 45);
+		btnNewButton.setText("Submit");
 		
 	}
 

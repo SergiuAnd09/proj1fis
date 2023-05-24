@@ -32,7 +32,7 @@ public class MainMenu extends Composite {
 				
 				LayoutStack.getInstance().addLayout(6, new ViewProductsPage(LoginPage.getShell(), SWT.NONE));
 				LoginPage.getShell().setText("View Products");
-				LoginPage.getShell().setSize(900, 650);
+				LoginPage.getShell().setSize(790, 510);
     			LayoutStack.getInstance().changeLayout(6);
 			}
 		});
