@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import fis1.DBConnection;
+import fis1.LoginMenu;
 
 public class ContentProviderOferta implements IStructuredContentProvider{
 	
@@ -17,7 +18,8 @@ public class ContentProviderOferta implements IStructuredContentProvider{
 		
 		try {
 			Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
-			PreparedStatement takeoffers = connection.prepareStatement("select * from offers ORDER BY name ASC, pret DESC");
+			PreparedStatement takeoffers = connection.prepareStatement("select * from offers WHERE email_vanzator = ? ORDER BY name ASC, pret DESC");
+			takeoffers.setString(1, LoginMenu.email);
 			ResultSet tot = takeoffers.executeQuery();
 			oferte.clear();
 			while(tot.next()) {

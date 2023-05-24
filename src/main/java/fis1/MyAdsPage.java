@@ -126,6 +126,11 @@ public class MyAdsPage extends Composite {
 		                    // Perform actions with the data
 		                    try {
 			                    Connection connection = DriverManager.getConnection(DBConnection.url, DBConnection.username, DBConnection.password);
+			                    PreparedStatement deleteOffer = connection.prepareStatement("DELETE FROM offers WHERE email_vanzator = ? AND name = ?");
+	                            deleteOffer.setString(1, email);
+	                            deleteOffer.setString(2, name);
+	                            deleteOffer.executeUpdate();
+	                            deleteOffer.close();
 	                            PreparedStatement deleteAd = connection.prepareStatement("DELETE FROM products WHERE email = ? AND nume = ?");
 	                            deleteAd.setString(1, email);
 	                            deleteAd.setString(2, name);
